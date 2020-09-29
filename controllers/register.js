@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
 exports.register = (req, res) => {
+  console.log(req.body);
   const { user_type, name, email, password, confirm_password } = req.body;
 
   console.log(req.body);
@@ -74,7 +75,8 @@ exports.register = (req, res) => {
     const newUser = new User({
       name,
       email,
-      password
+      password,
+      user_type
     });
 
     //Create salt and hash

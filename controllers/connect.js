@@ -1,6 +1,6 @@
 //Model
-const User = require("../model/user");
-const Connect = require("../model/user");
+const User = require("../models/user");
+const Connect = require("../models/user");
 
 exports.create = (req, res) => {
   const newConnect = new Connect({
@@ -36,4 +36,20 @@ exports.accept = (req, res) => {
     });
 };
 
-exports.reject = (req, res) => {};
+exports.ignore = (req, res) => {
+  Connect.findByIdAndUpdate(req.body.id, { active: false, ignored: true })
+    .then(() => res.json({ status: 200, data: "Request Rejected Successfully" }))
+    .catch(err => {
+      console.log(err);
+      res.json({ status: 400, data: "Something went wrong" });
+    });
+};
+
+exports.cancel = (req, res) => {
+  Connect.findByIdAndDelete(req.body.id)
+    .then(() => res.json({ status: 200, data: "Request deleted successfully" }))
+    .catch(err => {
+      console.log(err);
+      res.json({ status: 400, data: "Something went wrong" });
+    });
+};

@@ -29,6 +29,7 @@ app.use(express.static(__dirname + "public")); //Serves resources from public fo
 app.use("/api/register", require("./routes/api/register"));
 app.use("/api/login", require("./routes/api/login"));
 app.use("/api/connect", require("./routes/api/connect"));
+app.use("/api/user", require("./routes/api/user"));
 
 if (process.env.NODE_ENV === "production") {
   // Serve any static files
